@@ -1,9 +1,9 @@
 from rest_framework import serializers
 # import name will change depending on my model for my project 
-from .models import Todo
+from .models import Vehicle
 
 # Again, name will change depending on my model for my project
-class TodoSerializer(serializers.ModelSerializer):
+class VehicleSerializer(serializers.ModelSerializer):
   class Meta:
-    model = Todo
-    fields = ('id', 'title', 'description', 'completed')
+    model = Vehicle
+    fields = ('id', 'make', 'model', 'year', 'mileage', 'vin')

@@ -1,8 +1,7 @@
 import axios from "axios";
 
 export default axios.create({
-  // change this for my app
-  baseURL: 'http://localhost:8000/api/todos',
+  baseURL: 'http://localhost:8000/api/vehicles',
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json'
