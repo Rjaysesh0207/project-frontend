@@ -18,13 +18,13 @@
 
 ## Routes
 ### Vehicles
-* GET /vehicles: Display a list of all vehicles.
+* GET /vehicles Display a list of all vehicles.
 * GET /vehicles/new: Show a form to create a new vehicle.
-* POST /vehicles: Create a new vehicle.
-* GET /vehicles/:id: Show details of a specific vehicle.
-* GET /vehicles/:id/edit: Show a form to edit a specific vehicle.
-* PUT /vehicles/:id: Update a specific vehicle.
-* DELETE /vehicles/:id: Delete a specific vehicle.
+* POST /vehicles Create a new vehicle.
+* GET /vehicles/id/ Show details of a specific vehicle.
+* GET /vehicles/id/edit: Show a form to edit a specific vehicle.
+* PUT /vehicles/id/ Update a specific vehicle.
+* DELETE /vehicles/id/ Delete a specific vehicle.
 ### Maintenance Jobs
 * GET /vehicles/:id/jobs: Display a list of maintenance jobs for a specific vehicle.
 * GET /vehicles/:id/jobs/new: Show a form to create a new maintenance job for a specific vehicle.
