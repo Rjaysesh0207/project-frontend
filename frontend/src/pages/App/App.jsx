@@ -1,32 +1,43 @@
-import './App.css';
 import { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import {Routes, Route} from 'react-router-dom'
 import axios from 'axios';
 import VehiclePage from '../VehiclePage/VehiclePage'
-import NewVehiclePage from '../NewVehiclePage/NewVehiclePage';
-import AuthPage from '../AuthPage/AuthPage';
 import NavBar from '../../components/NavBar/NavBar';
-
+import AuthPage from '../AuthPage/AuthPage';
 
 
 export default function App() {
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState(true)
+  const [vehicleList, setVehicleList] = useState([])
+  useEffect(() => {
+    axios.get('http://localhost:8000/api/vehicles/')
+    .then((res) => {
+      console.log(res.data)
+      setVehicleList(res.data)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }, [])
   
 
   return (
-    <main className='App'>
+    <main className=''>
       {user ? 
         <>
           <NavBar />
           <Routes>
-            {/* Put client side routes here */}
-            <Route path="/vehicles/new" element={<NewVehiclePage />}/>
-            <Route path="/vehicles/" element={<VehiclePage />}/>
+            <Route path='/vehicles' element={<VehiclePage vehicleList={vehicleList} />}></Route>
           </Routes>
         </>
         :
-        <AuthPage />
-      }
+        <>
+          <NavBar />
+          <Routes>
+            <Route path='/auth' element={<AuthPage />}> </Route>
+          </Routes>
+        </>
+      } 
     </main>
   )
 }

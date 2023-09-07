@@ -22,7 +22,6 @@ from auto_care_hub import views
 router = routers.DefaultRouter()
 # the prefix will be the name I choose depending on the app
 router.register('vehicles', views.VehicleView, 'vehicle')
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
