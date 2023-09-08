@@ -11,6 +11,36 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+import sys
+import dj_database_url
+
+from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv())
+
+if os.getenv('ENV') == 'development':
+  DB_NAME = os.getenv('DB_NAME_DEV')
+  DB = {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': DB_NAME,
+  }
+
+  DEBUG = True
+
+  CORS_ORIGIN_WHITELIST = [ 
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+  ]
+else:
+  # If in production dj_database_url locates database on Heroku setup
+  DB = dj_database_url.config()
+  DEBUG = False
+  CORS_ORIGIN_WHITELIST = [
+    # url for production app
+    os.getenv('CLIENT_ORIGIN')
+  ]
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,10 +50,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-w*af10obu=5s2mhg%_g-8or3-7!4zx!8fpk=z1yz(x5alh94ry'
+SECRET_KEY = os.getenv('SECRET')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
 
 ALLOWED_HOSTS = []
 
@@ -40,6 +71,7 @@ INSTALLED_APPS = [
     'auto_care_hub',
     'corsheaders',
     'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -55,6 +87,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'backend.urls'
 
+# Not used, proffered React
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -78,12 +111,17 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'hub',
-    }
+    'default': DB
 }
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication'
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated'
+    ]
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -103,7 +141,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+ALLOWED_HOSTS = ['*']
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -113,7 +151,9 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_L10N = True
+
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
@@ -121,15 +161,13 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+AUTH_USER_MODEL = 'auto_care_hub.User'
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-CORS_ORIGIN_WHITELIST = [ 
-  'http://localhost:3000',
-  'http://127.0.0.1:3000',
-]
 
-CORS_ALLOW_ALL_ORIGINS = True

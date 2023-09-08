@@ -1,16 +1,18 @@
 from rest_framework import serializers
-from .models import Vehicle, User
+from .models.vehicle import Vehicle
+from .models.user import User
 
 class VehicleSerializer(serializers.ModelSerializer):
+  # Eventually I will have a jobs = JobSerializer(many=True), jobs is the name to be used for 'related_name' for the foreign key 
   class Meta:
     model = Vehicle
-    fields = ('id', 'make', 'model', 'year', 'mileage', 'vin')
 
-class UserSerializer(serializers.ModelSerializer):
-  
-  class Meta:
-    model = User
-    fields = ('id', 'username', 'email', 'password')
+    # I am sending back ID, make model year mileage and vin
+    fields = ('__all__')
 
-    # password will only be used for input during registration not included in response
-    extra_kwargs = {'password': {'write_only': True}}
+
+
+# class JobSerializer(serializers.ModelSerializer):
+  # class Meta:
+    # model = Job
+    # fields = '__all__'

@@ -24,19 +24,15 @@ export default function App() {
   return (
     <main className=''>
       {user ? 
-        <>
+      <>
           <NavBar />
           <Routes>
             <Route path='/vehicles' element={<VehiclePage vehicleList={vehicleList} />}></Route>
           </Routes>
-        </>
+      </>
         :
-        <>
-          <NavBar />
-          <Routes>
-            <Route path='/auth' element={<AuthPage />}> </Route>
-          </Routes>
-        </>
+          
+          <AuthPage />
       } 
     </main>
   )
