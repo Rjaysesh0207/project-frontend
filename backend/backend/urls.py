@@ -16,13 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework import routers
-from auto_care_hub.views import vehicle_view
 
-router = routers.DefaultRouter()
-# the prefix will be the name I choose depending on the app
-router.register('vehicles', vehicle_view.VehicleView, 'vehicle')
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
+  path('admin/', admin.site.urls),
+  path('', include('auto_care_hub.urls')),
 ]
