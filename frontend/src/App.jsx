@@ -1,11 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {Routes, Route} from 'react-router-dom'
 import AutoDismissAlert from './components/AutoDismissAlert/AutoDismissAlert'
 import Header from './components/Header/Header'
 import SignUp from './components/auth/SignUp.jsx'
-import SignIn from './components/auth/SignIn'
+import SignIn from './components/auth/SignOut.jsx'
 import SignOut from './components/auth/SignOut'
-import ChangePassword from './components/auth/ChangePassword'
+import ChangePassword from './components/auth/ChangPassword';
+import { v4 as uuid } from 'uuid'
 
 
 const App = () => {

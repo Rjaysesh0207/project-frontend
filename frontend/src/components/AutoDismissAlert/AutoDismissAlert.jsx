@@ -1,4 +1,6 @@
-function AutoDismissAlert () {
+import { useEffect, useState } from "react"
+import Alert from 'react-bootstrap/Alert'
+export default function AutoDismissAlert ({ variant, heading, message }) {
   // create `show` state. When this is false, the Alert will be hidden from the screen.
   const [show, setShow] = useState(true)
   // We are going to create a timer that will stop showing the alert after 5 seconds
@@ -22,7 +24,21 @@ function AutoDismissAlert () {
     }
   }, [])
 
-
+  return (
+    <Alert
+      /* This is the color, make it the bootstrap passed down as a prop */
+      variant={variant}
+      /* This function sets the show state to false, whenever the x in the top right is clicked. */
+      onClose={() => setShow(false)}
+      /* This adds a close button to our alert */
+      dismissible
+      /* The show property will display the alert if true, and hide it if false. */
+      show={show}
+    >
+      <div className='container'>
+        <Alert.Heading>{heading}</Alert.Heading>
+        <p className='alert-body'>{message}</p>
+      </div>
+    </Alert>
+  )
 }
-
-export default AutoDismissAlert
