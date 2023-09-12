@@ -72,7 +72,9 @@ class SignInView(generics.CreateAPIView):
             return Response({ 'msg': 'The username and/or password is incorrect.' }, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
 class SignOutView(generics.DestroyAPIView):
+    
     def delete(self, request):
+        print('signingout')
         # Remove this token from the user
         request.user.delete_token()
         # Logout will remove all session data

@@ -1,17 +1,30 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {Routes, Route} from 'react-router-dom'
 import AutoDismissAlert from './components/AutoDismissAlert/AutoDismissAlert'
 import Header from './components/Header/Header'
 import SignUp from './components/auth/SignUp.jsx'
 import SignIn from './components/auth/SignIn.jsx'
 import SignOut from './components/auth/SignOut'
+import VehicleList from './components/Vehicles/VehicleList';
+import VehicleDetail from './components/Vehicles/VehicleDetails';
 import ChangePassword from './components/auth/ChangPassword';
+import { vehicleList } from './api/vehicles';
 import { v4 as uuid } from 'uuid'
 
 
 const App = () => {
   const [user, setUser] = useState(null)
   const [msgAlerts, setMsgAlerts] = useState([])
+  const [vehicles, setVehicles] = useState([])
+  useEffect( () => {
+    async function fetchData(){
+      const response = await vehicleList(user)
+      console.log(response)
+      setVehicles(response.data.vehicles)
+    }
+    fetchData()
+  }, [user])
+
 
   const clearUser = () => setUser(null)
 
@@ -50,6 +63,13 @@ const App = () => {
             path='/change-password'
             element={<ChangePassword msgAlert={msgAlert} user={user} /> }
           />
+          <Route 
+          path='/vehicles'
+          element={<VehicleList vehicles={vehicles}/>}
+          />
+          <Route 
+          path='/vehicles/<int:pk>'
+          element={<VehicleDetail vehicle={vehicles}/>} />
 
         </Routes>
       </main>

@@ -28,7 +28,6 @@ const SignOut = ({ msgAlert, clearUser, user }) => {
     }
     performSignOut()
   }, [])
-  console.log(user.token)
   if (!user || shouldNavigate) {
     return <Navigate to='/' />
   }
