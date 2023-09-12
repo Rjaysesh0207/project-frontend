@@ -27,10 +27,8 @@ const Header = ({ user }) => (
   <Navbar bg='primary' variant='dark' expand='md'>
     <Container>
       <Navbar.Brand>
-        <Link to='/' style={{ color: '#FFF', textDecoration: 'none' }}>react-auth-template</Link>
+        <Link to='/' style={{ color: '#FFF', textDecoration: 'none' }}>AutoCare Hub</Link>
       </Navbar.Brand>
-      <Navbar.Toggle aria-controls='basic-navbar-nav' />
-      <Navbar.Collapse id='basic-navbar-nav'>
         <Nav className='ms-auto'>
           {user && (
             <span className='navbar-text me-2'>Welcome, {user.email}</span>
@@ -38,7 +36,6 @@ const Header = ({ user }) => (
           {alwaysOptions}
           {user ? authenticatedOptions : unauthenticatedOptions}
         </Nav>
-      </Navbar.Collapse>
     </Container>
   </Navbar>
 )

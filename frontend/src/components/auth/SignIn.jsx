@@ -17,13 +17,17 @@ const SignIn = ({ msgAlert, setUser }) => {
 
     try {
       const res = await signIn(email, password)
-      setUser(res.data.user)
+      const userData = res.data.user
+      setUser(userData)
+      // setUser(res.data.user)
+      
 
       msgAlert({
         heading: 'Sign In Success',
         message: signInSuccess,
         variant: 'success'
       })
+      console.log(userData)
       setShouldNavigate(true)
     } catch (error) {
       setEmail('')

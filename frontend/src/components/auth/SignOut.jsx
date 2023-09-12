@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 
 const SignOut = ({ msgAlert, clearUser, user }) => {
   const [shouldNavigate, setShouldNavigate] = useState(false)
+  
 
   // this is like componentDidMount, it will run whenever the SignOut component
   // is mounted (or added) to the page
@@ -27,7 +28,7 @@ const SignOut = ({ msgAlert, clearUser, user }) => {
     }
     performSignOut()
   }, [])
-
+  console.log(user.token)
   if (!user || shouldNavigate) {
     return <Navigate to='/' />
   }

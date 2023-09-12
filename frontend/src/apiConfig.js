@@ -2,7 +2,7 @@ let apiUrl
 const apiUrls = {
   // add the production url
   production: '',
-  development: 'http://localhost:3000'
+  development: 'http://localhost:8000'
 }
 
 if (window.location.hostname === 'localhost') {

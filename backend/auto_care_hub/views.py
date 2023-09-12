@@ -28,6 +28,7 @@ class SignUpView(generics.CreateAPIView):
             if created_user.is_valid():
                 # Save the user and send back a response!
                 created_user.save()
+                created_user.instance.get_auth_token()
                 return Response({ 'user': created_user.data }, status=status.HTTP_201_CREATED)
             else:
                 return Response(created_user.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -52,6 +53,7 @@ class SignInView(generics.CreateAPIView):
         user = authenticate(request, email=creds['email'], password=creds['password'])
         # Is our user is successfully authenticated...
         if user is not None:
+
             # And they're active...
             if user.is_active:
                 # Log them in!
