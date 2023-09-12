@@ -7,7 +7,7 @@ from .models import Vehicle, User
 class VehicleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vehicle
-        fields = ('id', 'year', 'make', 'model','mileage' , 'vin')
+        fields = ('id', 'year', 'make', 'model','mileage' , 'vin', 'owner')
 
 class UserSerializer(serializers.ModelSerializer):
     # This model serializer will be used for User creation

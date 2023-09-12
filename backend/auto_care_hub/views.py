@@ -118,10 +118,13 @@ class VehicleView(generics.ListCreateAPIView):
 
     def post(self, request):
         """Create request"""
+        print("Received request data:", request.data)
         # Add user to request data object
         request.data['vehicle']['owner'] = request.user.id
+        print("Modified request data:", request.data)
         # Serialize/create vehicle
         vehicle = VehicleSerializer(data=request.data['vehicle'])
+        
         # If the vehicle data is valid according to our serializer...
         if vehicle.is_valid():
             # Save the created vehicle & send a response
