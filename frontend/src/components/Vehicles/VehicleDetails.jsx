@@ -1,7 +1,7 @@
-export default function VehicleDetail({vehicles}) {
+export default function VehicleDetail({vehicles = []}) {
   return (
     <div>
-      <h1>List of Vehicles</h1>
+      <h1>Edit your vehicle info</h1>
       <ul>
         {vehicles.map((vehicle, index) => (
           <li key={index}>
