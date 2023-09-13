@@ -1,7 +1,7 @@
 let apiUrl
 const apiUrls = {
   // add the production url
-  production: '',
+  production: 'https://auto-care-hub-backend-ccc116e343ab.herokuapp.com',
   development: 'http://localhost:8000'
 }
 
